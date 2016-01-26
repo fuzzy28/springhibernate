@@ -2,38 +2,38 @@ package org.jrue.poc.springhibernate.dao;
 
 import java.util.List;
 
-import org.hibernate.criterion.Restrictions;
 import org.jrue.poc.springhibernate.domain.User;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserDao extends HibernateGenericDao<User, String> {
+public class UserDao extends JpaGenericDao<User, String> {
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public User findSingle(String key) {
-		return (User)getCurrentSession().createCriteria(User.class)
-								  .add(Restrictions.eq("name", key))								  
-								  .uniqueResult();
+	public User findSingle(String key) {		
+		return DataAccessUtils.singleResult(entityManager.createQuery("FROM User WHERE NAME = :name")
+				   .setParameter("name", key).getResultList());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> findAll() {		
-		return getCurrentSession().createCriteria(User.class).list();
+	public List<User> findAll() {
+		return (List<User>) entityManager.createQuery("FROM User");
 	}
 
 	@Override
 	public void save(User record) {
-		getCurrentSession().save(record);
+		entityManager.persist(record);
 	}
 
 	@Override
 	public void update(User record) {
-		getCurrentSession().update(record);
+		entityManager.merge(record);
 	}
 
 	@Override
 	public void delete(String record) {		
-		getCurrentSession().delete(findSingle(record));
+		entityManager.remove(findSingle(record));
 	}
 }

@@ -44,7 +44,6 @@ public class UserService extends GenericService<User, String> {
 	}
 
 	@Override
-	@Transactional
 	public void delete(String key) {
 		dao.delete(key);
 	}

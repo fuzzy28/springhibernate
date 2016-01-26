@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:META-INF/spring-config.xml")
@@ -28,7 +27,6 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	@Transactional
 	public void testSingleCRUD() {
 		//test insert single record		
 		user.setName("JJJJ");
@@ -59,4 +57,5 @@ public class UserServiceTest {
 		userService.delete(updatedUser.getName());
 		Assert.assertNull(userService.findSingle(user.getName()));
 	}	
+
 }
