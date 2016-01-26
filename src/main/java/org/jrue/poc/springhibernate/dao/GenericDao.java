@@ -1,0 +1,12 @@
+package org.jrue.poc.springhibernate.dao;
+
+import java.util.List;
+
+public interface GenericDao<E, K> {
+
+	E findSingle(K key);
+	List<E> findAll();
+	void save(E record);
+	void update(E record);
+	void delete(K record);
+}
