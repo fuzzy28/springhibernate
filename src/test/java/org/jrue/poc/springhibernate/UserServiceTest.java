@@ -1,5 +1,6 @@
 package org.jrue.poc.springhibernate;
 
+import org.jrue.poc.springconfig.AppConfig;
 import org.jrue.poc.springhibernate.domain.User;
 import org.jrue.poc.springhibernate.service.GenericService;
 import org.junit.After;
@@ -11,7 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:META-INF/spring-config.xml")
+@ContextConfiguration(classes = {AppConfig.class})
 public class UserServiceTest {
 
 	@Autowired
@@ -29,7 +30,7 @@ public class UserServiceTest {
 	@Test
 	public void testSingleCRUD() {
 		//test insert single record		
-		user.setName("JJJJ");
+		user.setName("JOEL RUELOS");
 		user.setPassword("password123");
 		user.setEmployeeId("123312");
 		user.setDepartmentName("SDD1");

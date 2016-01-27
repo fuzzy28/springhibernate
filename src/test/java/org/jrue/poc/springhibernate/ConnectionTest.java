@@ -4,6 +4,8 @@ import java.sql.SQLException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import org.jrue.poc.springconfig.AppConfig;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:META-INF/spring-config.xml")
+@ContextConfiguration(classes = {AppConfig.class})
 public class ConnectionTest {
 
 	@PersistenceContext
@@ -26,6 +28,5 @@ public class ConnectionTest {
 	@Test
 	public void testConnectivity() throws SQLException {	
 		Assert.assertNotNull(emf);
-	}
-	
+	}	
 }
