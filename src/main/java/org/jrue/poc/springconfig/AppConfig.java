@@ -71,10 +71,8 @@ public class AppConfig {
 	
 	@Bean
 	@Primary
-	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
-		JpaTransactionManager jpaTransactionManager = new
-					JpaTransactionManager(emf);
-		return jpaTransactionManager;
+	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {;
+		return new JpaTransactionManager(emf);
 	}
 	
 	@Bean
