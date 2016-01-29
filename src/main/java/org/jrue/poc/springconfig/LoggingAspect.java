@@ -6,6 +6,11 @@ import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Configuration of AOP advice
+ * @author jruelos
+ *
+ */
 @Aspect
 @Configuration
 public class LoggingAspect {

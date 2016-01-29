@@ -7,6 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Provide implementation of UserService interface which delegates
+ * the implemented methods to User Repository.
+ * 
+ * @author jruelos
+ *
+ */
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {

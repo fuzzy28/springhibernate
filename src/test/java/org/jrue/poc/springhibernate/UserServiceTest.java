@@ -29,7 +29,6 @@ public class UserServiceTest {
 	
 	@Test
 	public void testSingleCRUD() {
-		
 		//test insert single record		
 		user.setName("JOEL RUELOS");
 		user.setPassword("password123");
