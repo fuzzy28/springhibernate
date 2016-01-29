@@ -5,11 +5,9 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 @Aspect
 @Configuration
-@Component
 public class LoggingAspect {
 
 	static Logger logger = org.slf4j.LoggerFactory.getLogger(Logger.class);
