@@ -3,6 +3,12 @@ package org.jrue.poc.springhibernate.domain;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
+/**
+ * Base for all Entities that have basic audit information
+ * @author jruelos
+ *
+ */
+
 @MappedSuperclass
 public abstract class BaseEntity {
 
@@ -45,6 +51,5 @@ public abstract class BaseEntity {
 	}
 	public void setCreproid(String creproid) {
 		this.creproid = creproid;
-	}
-		
+	}		
 }

@@ -6,11 +6,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -20,11 +20,17 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+/**
+ * DataSource, Repository and Transaction management Configuration
+ * Database connection is loaded from database.properties configuration file
+ * @author jruelos
+ *
+ */
 @Configuration
-@ComponentScan(basePackages = {"org.jrue.poc"})
 @PropertySource("classpath:database.properties")
+@EnableJpaRepositories("org.jrue.poc.springhibernate.repository") 
 @EnableTransactionManagement
-public class AppConfig {
+public class PersistenceContext {
 
 	@Value("${db.driver}")
 	private String driverClassName;
@@ -41,6 +47,12 @@ public class AppConfig {
 	@Value("${db.dialect}")
 	private String dialect;
 	
+	@Value("${hibernate.show_sql}")
+	private boolean show_sql;
+	
+	@Value("${hibernate.format_sql}")
+	private boolean format_sql;
+	
 	@Bean
 	@Primary
 	public DataSource getDatasource() {	
@@ -54,15 +66,16 @@ public class AppConfig {
 	
 	@Bean
 	@Primary
-	public LocalContainerEntityManagerFactoryBean entityManager() {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean entityManager = new
 					LocalContainerEntityManagerFactoryBean();
 		entityManager.setDataSource(getDatasource());
 		entityManager.setPackagesToScan("org.jrue.poc.springhibernate.domain");
 		entityManager.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		Properties jpaProps = new Properties();
-		jpaProps.put("show_sql", "true");
-		jpaProps.put("dialect", dialect);
+		jpaProps.put("hibernate.show_sql", String.valueOf(show_sql));
+		jpaProps.put("hibernate.dialect", dialect);
+		jpaProps.put("hibernate.format_sql", String.valueOf(format_sql));
 		entityManager.setJpaProperties(jpaProps);
 		return entityManager;
 	}

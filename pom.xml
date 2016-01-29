@@ -18,48 +18,45 @@
     <oracle.version>11.2.0.3</oracle.version>
     <junit.version>4.11</junit.version>
     <hibernate.version>4.2.1.Final</hibernate.version>
+    <slf4j.version>1.6.1</slf4j.version>
   </properties>
 
+  <!-- TESTING CONFIG -->
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
-    <!-- START OF SPRING CONFIG -->      
+    <!-- SPRING CONFIG -->      
     <dependency>
       <groupId>org.springframework</groupId>
 	  <artifactId>spring-context</artifactId>
-	  <version>${spring.version}</version>
     </dependency> 
     <dependency>
 	  <groupId>org.springframework</groupId>
 	  <artifactId>spring-test</artifactId>
-	  <version>${spring.version}</version>
     </dependency>  
     <dependency>
 	  <groupId>org.springframework</groupId>
 	  <artifactId>spring-orm</artifactId>
-	  <version>${spring.version}</version>
     </dependency>     
     <dependency>
 	  <groupId>org.springframework</groupId>
 	  <artifactId>spring-tx</artifactId>
-	  <version>${spring.version}</version>
     </dependency>  
     <dependency>
       <groupId>org.springframework</groupId>
 	  <artifactId>spring-jdbc</artifactId>
-	  <version>${spring.version}</version>
-    </dependency> 
-    <!-- END OF SPRING CONFIG -->         
-
-	<!-- DataSource (HikariCP) -->
+    </dependency>      
+	<dependency>
+	    <groupId>org.springframework.data</groupId>
+	    <artifactId>spring-data-jpa</artifactId>
+	</dependency>
+	<!-- DATASOURCE CONFIG (HikariCP) -->
 	<dependency>
 	    <groupId>com.zaxxer</groupId>
 	    <artifactId>HikariCP-java6</artifactId>
-	    <version>2.2.5</version>
 	</dependency>    
     <dependency>
       <groupId>com.oracle</groupId>
@@ -67,16 +64,39 @@
 	  <version>${oracle.version}</version>
     </dependency>   
 	<dependency>
-	    <groupId>org.hibernate</groupId>
+	
+	<!-- HIBERNATE CONFIG -->
+	<groupId>org.hibernate</groupId>
 	    <artifactId>hibernate-core</artifactId>
-	    <version>${hibernate.version}</version>
 	</dependency> 
 	<dependency>
 	   <groupId>org.hibernate</groupId>
 	   <artifactId>hibernate-entitymanager</artifactId>
-	   <version>${hibernate.version}</version>
-	</dependency>	   
+	</dependency>	
+	
+ 	<!-- LOGGING CONFIG -->
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-log4j12</artifactId>
+	</dependency>	  
+	 
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-aspects</artifactId>
+	</dependency>	 
   </dependencies>
+  
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+  			<groupId>io.spring.platform</groupId>
+  			<artifactId>platform-bom</artifactId>
+  			<version>1.1.2.RELEASE</version>
+  			<type>pom</type>
+  			<scope>import</scope>
+  		</dependency>
+  	</dependencies>
+  </dependencyManagement>
  
   <build>
   	<plugins>

@@ -10,8 +10,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Component; 
 
+/**
+ * Basic User Entity that is mapped with table M_USER
+ * @author jruelos
+ *
+ */
 @Component
 @Entity
 @Table(name="M_USER")
@@ -21,7 +26,7 @@ public class User extends BaseEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence")
-	@SequenceGenerator(name="sequence", sequenceName="SEQ_M_USER")
+	@SequenceGenerator(name="sequence", sequenceName="SEQ_M_USER", allocationSize=1)
 	@Column
 	private int id;	
 	@Column

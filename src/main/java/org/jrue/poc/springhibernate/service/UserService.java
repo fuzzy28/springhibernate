@@ -2,49 +2,24 @@ package org.jrue.poc.springhibernate.service;
 
 import java.util.List;
 
-import org.jrue.poc.springhibernate.dao.GenericDao;
 import org.jrue.poc.springhibernate.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
-@Transactional
-public class UserService extends GenericService<User, String> {
+/**
+ * This service provides CRUD operations for {@link User} entity
+ * @author jruelos
+ *
+ */
+public interface UserService {
 
-	@Autowired
-	public UserService(GenericDao<User,String> userDao) {
-		super(userDao);
-	}
+	 void delete(User deleted);
 
-	@Override
-	public User findSingle(String key) {
-		return dao.findSingle(key);
-	}
+	 List<User> findAll();
+    
+	 User findOne(Long id);
 
-	@Override
-	public List<User> findAll() {
-		return dao.findAll();
-	}
-
-	@Override
-	public void save(User record) {
-		User usr = findSingle(record.getName());
-		if(usr != null && !usr.getName().isEmpty()) {
-			throw new DuplicateKeyException(usr.getName() + " already exists!");
-		} else {
-			dao.save(record);
-		}
-	}
-
-	@Override
-	public void update(User record) {
-		dao.update(record);
-	}
-
-	@Override
-	public void delete(String key) {
-		dao.delete(key);
-	}
+	 User findByName(String name);
+	 
+	 User save(User persisted);
+	 
+	 User findByNameAndPassword(String name, String password);
 }
